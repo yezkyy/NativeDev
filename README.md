@@ -50,6 +50,16 @@ Aplikasi ini dikembangkan menggunakan teknologi berikut:
 
 ---
 
+## Akun Demo
+
+| Username | Password   | Role   | Akses / Catatan |
+|----------|------------|--------|-----------------|
+| regar    | 12345678   | Driver | Tombol **Driver** muncul di navbar → /driver |
+| rizky    | 12345678   | User   | User biasa |
+| *user baru dari register* | *sesuai input* | User | Semua akun hasil registrasi otomatis dianggap **user biasa** |
+
+---
+
 ## Struktur Folder Singkat
 
 Struktur dasar repository:
