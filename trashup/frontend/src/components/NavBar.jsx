@@ -13,12 +13,17 @@ import navbarLogo from "../assets/image/logo.png";
 import LogoutButton from "./LogoutButton";
 
 const NavBar = () => {
-	const user = JSON.parse(localStorage.getItem("user"));
+	const storedUser = localStorage.getItem("user");
+	const user = storedUser ? JSON.parse(storedUser) : null;
+
+	const bg = useColorModeValue("white", "gray.900");
+	const buttonBg = useColorModeValue("green.700", "blue.600");
+	const buttonHoverBg = useColorModeValue("green.600", "blue.500");
 
 	return (
 		<Box
 			as="nav"
-			bg={useColorModeValue("white", "gray.900")}
+			bg={bg}
 			boxShadow="sm"
 			position="sticky"
 			top={0}
@@ -30,7 +35,9 @@ const NavBar = () => {
 					alignItems="center"
 					justifyContent="space-between"
 					flexDir={{ base: "column", md: "row" }}
+					gap={{ base: 3, md: 0 }}
 				>
+					{/* Logo */}
 					<Box>
 						<Link to="/">
 							<Image
@@ -42,7 +49,8 @@ const NavBar = () => {
 						</Link>
 					</Box>
 
-					<HStack spacing={4}>
+					{/* Menu kanan */}
+					<HStack spacing={4} alignItems="center">
 						<Link to="/about">
 							<Text fontWeight="medium" fontSize="md">
 								Tentang Kami
@@ -59,23 +67,36 @@ const NavBar = () => {
 							</Text>
 						</Link>
 
+						{/* Kalau user login */}
 						{user ? (
-							<LogoutButton />
-						) : (
 							<>
-								<Link to="/login">
-									<Button
-										bg={useColorModeValue("green.700", "blue.600")}
-										_hover={{ bg: useColorModeValue("green.600", "blue.500") }}
-										color="white"
-										fontWeight="medium"
-										fontSize="md"
-										px={6}
-									>
-										Masuk
-									</Button>
-								</Link>
+								{/* Hanya regar yang punya tombol driver */}
+								{user.username === "regar" && (
+									<Link to="/driver">
+										<Button
+											colorScheme="blue"
+											size="sm"
+											fontWeight="medium"
+										>
+											Driver
+										</Button>
+									</Link>
+								)}
+								<LogoutButton />
 							</>
+						) : (
+							<Link to="/login">
+								<Button
+									bg={buttonBg}
+									_hover={{ bg: buttonHoverBg }}
+									color="white"
+									fontWeight="medium"
+									fontSize="md"
+									px={6}
+								>
+									Masuk
+								</Button>
+							</Link>
 						)}
 					</HStack>
 				</Flex>
